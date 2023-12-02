@@ -22,6 +22,6 @@ namespace Green_Lagoon.Domain.Entities
         [Display(Name ="Image Url")]
         public string? ImageUrl { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get;}
+        public DateTime? UpdatedDate { get; set; }
     }
 }
