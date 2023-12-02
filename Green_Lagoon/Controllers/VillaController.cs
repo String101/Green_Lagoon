@@ -1,4 +1,5 @@
-﻿using Green_Lagoon.Infrastructure.Data;
+﻿using Green_Lagoon.Domain.Entities;
+using Green_Lagoon.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Green_Lagoon.Controllers
@@ -13,8 +14,25 @@ namespace Green_Lagoon.Controllers
         }
         public IActionResult Index()
         {
-            var villa=_context.Villas.ToList();
+            var villas=_context.Villas.ToList();
+            return View(villas);
+        }
+        public IActionResult Create()
+        {
             return View();
         }
+        [HttpPost]
+        public IActionResult Create(Villa obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Villas.Add(obj);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+           return View();
+            
+        }
+
     }
 }
