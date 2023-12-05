@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Green_Lagoon.Infrastructure\Green_Lagoon.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

@@ -41,7 +41,8 @@ namespace Green_Lagoon.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Occupancy")
                         .HasColumnType("int");
@@ -51,6 +52,9 @@ namespace Green_Lagoon.Infrastructure.Migrations
 
                     b.Property<int>("Sqft")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

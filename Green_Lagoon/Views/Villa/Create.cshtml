@@ -12,6 +12,7 @@
  <div class="card-body border-4">
     <form method="post" class="row">
         <div class="p-3">
+           @*  <div asp-validation-summary="ModelOnly"></div> *@
             <div class="form-floating py-2 col-12">
                 <input asp-for="@Model.Name" class="form-control border shadow" />
                 <label asp-for="Name" class="ms-2"></label>
@@ -59,3 +60,8 @@
 
  </div>
 
+@* @section Scripts{
+    @{
+        <partial name="_ValidationScripsPartial" />
+    }
+} *@
