@@ -33,7 +33,7 @@ namespace Green_Lagoon.Controllers
                 _context.Villas.Add(obj);
                 _context.SaveChanges();
                 TempData["success"] = "The Villa has been created successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             TempData["error"] = "The Villa can not be created.";
             return View();
@@ -58,7 +58,7 @@ namespace Green_Lagoon.Controllers
                 _context.Villas.Update(obj);
                 _context.SaveChanges();
                 TempData["success"] = "The Villa has been updated successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             TempData["error"] = "The Villa can not be updated.";
             return View();
@@ -83,7 +83,7 @@ namespace Green_Lagoon.Controllers
                 _context.Villas.Remove(objfromDb);
                 _context.SaveChanges();
                 TempData["success"] = "The Villa has been deleted successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             }
             TempData["error"] = "The Villa can not be deleted.";
