@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Green_Lagoon.Application\Green_Lagoon.Application.csproj" />
     <ProjectReference Include="..\Green_Lagoon.Domain\Green_Lagoon.Domain.csproj" />
   </ItemGroup>
 

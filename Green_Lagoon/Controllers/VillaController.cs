@@ -1,4 +1,5 @@
-﻿using Green_Lagoon.Domain.Entities;
+﻿using Green_Lagoon.Application.Common.Interface;
+using Green_Lagoon.Domain.Entities;
 using Green_Lagoon.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,17 @@ namespace Green_Lagoon.Controllers
 {
     public class VillaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public VillaController(ApplicationDbContext context)
+        public VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         } 
         public IActionResult Index()
         {
-            var villas=_context.Villas.ToList();
+            var villas= _unitOfWork.Villa.GetAll();
             return View(villas);
         }
         public IActionResult Create()
@@ -30,8 +33,22 @@ namespace Green_Lagoon.Controllers
             }
             if(ModelState.IsValid)
             {
-                _context.Villas.Add(obj);
-                _context.SaveChanges();
+                if(obj.Image != null)
+                {
+                    string filename= Guid.NewGuid().ToString() + Path.GetExtension(obj.Image.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath,@"images\VillaImage");
+
+                    using var fileStream = new FileStream(Path.Combine(imagePath, filename), FileMode.Create);
+                    obj.Image.CopyTo(fileStream);
+
+                    obj.ImageUrl=@"\images\VillaImage\"+filename;
+                }
+                else
+                {
+                    obj.ImageUrl = "https://placehold.co/600x402";
+                }
+                _unitOfWork.Villa.Add(obj);
+                _unitOfWork.Villa.Save();
                 TempData["success"] = "The Villa has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -42,7 +59,7 @@ namespace Green_Lagoon.Controllers
         [HttpGet]
         public IActionResult Update(int villaid)
         {
-            Villa? obj= _context.Villas.FirstOrDefault(x => x.Id==villaid);
+            Villa? obj= _unitOfWork.Villa.Get(x => x.Id==villaid);
             if(obj==null) 
             { 
                return RedirectToAction("Error","Home");
@@ -55,8 +72,27 @@ namespace Green_Lagoon.Controllers
            
             if (ModelState.IsValid)
             {
-                _context.Villas.Update(obj);
-                _context.SaveChanges();
+                if (obj.Image != null)
+                {
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(obj.Image.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\VillaImage");
+
+                    if(!string.IsNullOrEmpty(obj.ImageUrl))
+                    {
+                        var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+                    using var fileStream = new FileStream(Path.Combine(imagePath, filename), FileMode.Create);
+                    obj.Image.CopyTo(fileStream);
+
+                    obj.ImageUrl = @"\images\VillaImage\" + filename;
+                }
+                
+                _unitOfWork.Villa.Update(obj);
+                _unitOfWork.Villa.Save();
                 TempData["success"] = "The Villa has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -67,7 +103,7 @@ namespace Green_Lagoon.Controllers
         [HttpGet]
         public IActionResult Delete(int villaid)
         {
-            Villa? obj = _context.Villas.FirstOrDefault(x => x.Id == villaid);
+            Villa? obj = _unitOfWork.Villa.Get(x => x.Id == villaid);
             if (obj is null)
             {
                 return RedirectToAction("Error", "Home");
@@ -77,11 +113,19 @@ namespace Green_Lagoon.Controllers
         [HttpPost]
         public IActionResult Delete(Villa obj)
         {
-            Villa? objfromDb = _context.Villas.FirstOrDefault(x=>x.Id==obj.Id);
+            Villa? objfromDb = _unitOfWork.Villa.Get(x=>x.Id==obj.Id);
             if(objfromDb is not null)
             {
-                _context.Villas.Remove(objfromDb);
-                _context.SaveChanges();
+                if (!string.IsNullOrEmpty(objfromDb.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, objfromDb.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+                _unitOfWork.Villa.Remove(objfromDb);
+                _unitOfWork.Villa.Save();
                 TempData["success"] = "The Villa has been deleted successfully.";
                 return RedirectToAction(nameof(Index));
 
