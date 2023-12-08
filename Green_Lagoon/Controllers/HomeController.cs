@@ -1,4 +1,7 @@
+using Green_Lagoon.Application.Common.Interface;
+using Green_Lagoon.Infrastructure.Repositories;
 using Green_Lagoon.Models;
+using Green_Lagoon.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +9,23 @@ namespace Green_Lagoon.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork; 
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
+        public HomeController(IUnitOfWork unitOfWork)
+        { 
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            HomeViewModel homeViewModel = new() 
+            { 
+                VillaList=_unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity"),
+                Nights=1,
+                CheckInDate= DateOnly.FromDateTime(DateTime.Now),
+
+            };
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()

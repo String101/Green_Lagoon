@@ -14,11 +14,13 @@ namespace Green_Lagoon.Infrastructure.Repositories
 
         public IVilla Villa { get; private set; }
         public IVillaNumber VillaNumber { get; private set; }
+        public IAmenity Amenity { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         { 
             _db = db;
             Villa = new VillaRepo(_db);
             VillaNumber = new VillaNumberRepo(_db);
+            Amenity = new AmenityRepo(_db);
         }
        
     }
