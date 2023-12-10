@@ -1,10 +1,12 @@
 ﻿using Green_Lagoon.Application.Common.Interface;
 using Green_Lagoon.Domain.Entities;
 using Green_Lagoon.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Green_Lagoon.Controllers
 {
+    [Authorize]
     public class VillaController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,13 +1,16 @@
 ﻿using Green_Lagoon.Application.Common.Interface;
+using Green_Lagoon.Application.Common.Utility;
 using Green_Lagoon.Domain.Entities;
 using Green_Lagoon.Infrastructure.Data;
 using Green_Lagoon.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Green_Lagoon.Controllers
 {
+    [Authorize(Roles =SD.Role_Admin)]
     public class VillaAmenityController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
