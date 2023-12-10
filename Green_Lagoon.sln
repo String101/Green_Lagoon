@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Green_Lagoon", "Green_Lagoon\Green_Lagoon.csproj", "{417C07AF-2E4E-477B-90A1-AC081025BD55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Green_Lagoon", "Green_Lagoon\Green_Lagoon.csproj", "{417C07AF-2E4E-477B-90A1-AC081025BD55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Green_Lagoon.Domain", "Green_Lagoon.Domain\Green_Lagoon.Domain.csproj", "{88B513C5-243F-43DF-BA21-2EA86A166A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Green_Lagoon.Domain", "Green_Lagoon.Domain\Green_Lagoon.Domain.csproj", "{88B513C5-243F-43DF-BA21-2EA86A166A8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Green_Lagoon.Application", "Green_Lagoon.Application\Green_Lagoon.Application.csproj", "{89C51935-9485-4A99-939B-BAC1FFB86163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Green_Lagoon.Application", "Green_Lagoon.Application\Green_Lagoon.Application.csproj", "{89C51935-9485-4A99-939B-BAC1FFB86163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Green_Lagoon.Infrastructure", "Green_Lagoon.Infrastructure\Green_Lagoon.Infrastructure.csproj", "{E4A06ABC-B5AF-4A9F-95DC-4C2FB9B8E6DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Green_Lagoon.Infrastructure", "Green_Lagoon.Infrastructure\Green_Lagoon.Infrastructure.csproj", "{E4A06ABC-B5AF-4A9F-95DC-4C2FB9B8E6DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

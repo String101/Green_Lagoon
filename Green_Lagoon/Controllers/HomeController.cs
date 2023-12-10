@@ -27,6 +27,44 @@ namespace Green_Lagoon.Controllers
             };
             return View(homeViewModel);
         }
+        [HttpPost]
+        public IActionResult Index(HomeViewModel homeViewM)
+        {
+
+            homeViewM.VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
+               
+            foreach(var villa in homeViewM.VillaList) 
+            { 
+               if(villa.Id % 2 == 0)
+                {
+                    villa.IsAvailable = false;
+                }
+            }
+            
+            return View(homeViewM);
+        }
+        public IActionResult GetVillaByDate(int nights,DateOnly checkIndate)
+        {
+            Thread.Sleep(3000);
+            var villaList=_unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity").ToList();
+            foreach (var villa in villaList)
+            {
+                if (villa.Id % 2 == 0)
+                {
+                    villa.IsAvailable = false;
+                }
+            }
+            HomeViewModel homeViewModel = new()
+            {
+               CheckInDate = checkIndate,
+               VillaList = villaList,
+               Nights = nights
+
+            };
+            return PartialView("_VillaList", homeViewModel);
+        }
+
+        
 
         public IActionResult Privacy()
         {
