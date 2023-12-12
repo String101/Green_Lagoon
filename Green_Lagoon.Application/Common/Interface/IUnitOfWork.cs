@@ -11,6 +11,8 @@ namespace Green_Lagoon.Application.Common.Interface
         IVilla Villa { get; }
         IVillaNumber VillaNumber { get; }
         IAmenity Amenity { get; }
+        IBooking Booking { get; }
+        IApplicationUser User { get; }
         
     }
 }

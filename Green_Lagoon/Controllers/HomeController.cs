@@ -28,21 +28,6 @@ namespace Green_Lagoon.Controllers
             return View(homeViewModel);
         }
         [HttpPost]
-        public IActionResult Index(HomeViewModel homeViewM)
-        {
-
-            homeViewM.VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
-               
-            foreach(var villa in homeViewM.VillaList) 
-            { 
-               if(villa.Id % 2 == 0)
-                {
-                    villa.IsAvailable = false;
-                }
-            }
-            
-            return View(homeViewM);
-        }
         public IActionResult GetVillaByDate(int nights,DateOnly checkIndate)
         {
             Thread.Sleep(3000);
