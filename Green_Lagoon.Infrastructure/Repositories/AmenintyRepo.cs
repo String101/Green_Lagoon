@@ -17,10 +17,7 @@ namespace Green_Lagoon.Infrastructure.Repositories
             _context = context;
         }
 
-        public void Save()
-        {
-           _context.SaveChanges();
-        }
+        
 
         public void Update(Amenity entity)
         {

@@ -1,4 +1,5 @@
 using Green_Lagoon.Application.Common.Interface;
+using Green_Lagoon.Application.Common.Utility;
 using Green_Lagoon.Infrastructure.Repositories;
 using Green_Lagoon.Models;
 using Green_Lagoon.ViewModels;
@@ -30,14 +31,15 @@ namespace Green_Lagoon.Controllers
         [HttpPost]
         public IActionResult GetVillaByDate(int nights,DateOnly checkIndate)
         {
-            Thread.Sleep(3000);
+           
             var villaList=_unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity").ToList();
+            var villaNumbersList = _unitOfWork.VillaNumber.GetAll().ToList();
+            var bookedVillas = _unitOfWork.Booking.GetAll(u => u.Status == SD.StatusApproved || u.Status == SD.StatusCheckedIn).ToList();
             foreach (var villa in villaList)
             {
-                if (villa.Id % 2 == 0)
-                {
-                    villa.IsAvailable = false;
-                }
+                int roomsAvailable = SD.VillaRoomAvailable_Count(villa.Id, villaNumbersList, checkIndate, nights, bookedVillas);
+
+                villa.IsAvailable = roomsAvailable > 0 ? true : false;
             }
             HomeViewModel homeViewModel = new()
             {

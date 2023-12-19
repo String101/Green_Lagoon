@@ -27,6 +27,9 @@ namespace Green_Lagoon.Infrastructure.Repositories
             Booking = new BookingRepo(_db);
             User = new ApplicationUserRepo(_db);
         }
-       
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
     }
 }

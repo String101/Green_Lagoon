@@ -50,7 +50,7 @@ namespace Green_Lagoon.Controllers
                     obj.ImageUrl = "https://placehold.co/600x402";
                 }
                 _unitOfWork.Villa.Add(obj);
-                _unitOfWork.Villa.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -94,7 +94,7 @@ namespace Green_Lagoon.Controllers
                 }
                 
                 _unitOfWork.Villa.Update(obj);
-                _unitOfWork.Villa.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -127,7 +127,7 @@ namespace Green_Lagoon.Controllers
                     }
                 }
                 _unitOfWork.Villa.Remove(objfromDb);
-                _unitOfWork.Villa.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa has been deleted successfully.";
                 return RedirectToAction(nameof(Index));
 

@@ -10,8 +10,8 @@ namespace Green_Lagoon.Application.Common.Interface
     public interface IBooking:IRepository<Booking>
     {
         void Update(Booking entity);
-        void UpdateStatus(int bookingId, string orderStatuse);
+        void UpdateStatus(int bookingId, string bookingstatus,int villanumber);
         void UpdateStripePaymentID(int bookingId, string sessionId,string paymentIntentId);
-        void Save();
+       
     }
 }

@@ -11,6 +11,6 @@ namespace Green_Lagoon.Application.Common.Interface
     {
         void Update(Amenity entity);
 
-        void Save();
+       
     }
 }

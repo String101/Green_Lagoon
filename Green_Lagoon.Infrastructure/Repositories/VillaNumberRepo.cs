@@ -23,10 +23,7 @@ namespace Green_Lagoon.Infrastructure.Repositories
 
         
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
+        
 
        public void Update(VillaNumber entity)
         {

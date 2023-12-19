@@ -43,7 +43,7 @@ namespace Green_Lagoon.Controllers
             if (ModelState.IsValid && !roomNumberExists)
             {
                 _unitOfWork.VillaNumber.Add(obj.VillaNumber);
-                _unitOfWork.VillaNumber.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa Number has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -87,7 +87,7 @@ namespace Green_Lagoon.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.VillaNumber.Update(villaNumberViewModel.VillaNumber);
-                _unitOfWork.VillaNumber.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa Number has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -127,7 +127,7 @@ namespace Green_Lagoon.Controllers
             if (objfromDb is not null)
             {
                 _unitOfWork.VillaNumber.Remove(objfromDb);
-                _unitOfWork.VillaNumber.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa Number has been deleted successfully.";
                 return RedirectToAction(nameof(Index));
 

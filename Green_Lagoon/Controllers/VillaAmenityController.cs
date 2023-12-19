@@ -47,7 +47,7 @@ namespace Green_Lagoon.Controllers
             {
                 
                 _unitOfWork.Amenity.Add(obj.Amenity);
-                _unitOfWork.Amenity.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa Amenity has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -88,7 +88,7 @@ namespace Green_Lagoon.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.Amenity.Update(villaAmenityViewModel.Amenity);
-                _unitOfWork.Amenity.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa Amenity has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -128,7 +128,7 @@ namespace Green_Lagoon.Controllers
             if (objfromDb is not null)
             {
                 _unitOfWork.Amenity.Remove(objfromDb);
-                _unitOfWork.Amenity.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The Villa Amenity has been deleted successfully.";
                 return RedirectToAction(nameof(Index));
 

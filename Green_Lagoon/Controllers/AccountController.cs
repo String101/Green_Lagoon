@@ -41,14 +41,23 @@ namespace Green_Lagoon.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (string.IsNullOrEmpty(loginViewM.RedirectUrl))
+                    var user = await _userManager.FindByEmailAsync(loginViewM.Email);
+                    if(await _userManager.IsInRoleAsync(user,SD.Role_Admin))
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                     else
                     {
-                        return LocalRedirect(loginViewM.RedirectUrl);
+                        if (string.IsNullOrEmpty(loginViewM.RedirectUrl))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            return LocalRedirect(loginViewM.RedirectUrl);
+                        }
                     }
+                   
 
                 }
                 else

@@ -12,7 +12,7 @@ namespace Green_Lagoon.Application.Common.Interface
        
         void Update(VillaNumber entity);
        
-        void Save();
+     
 
     }
 }

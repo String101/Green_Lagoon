@@ -13,6 +13,7 @@ namespace Green_Lagoon.Application.Common.Interface
         IAmenity Amenity { get; }
         IBooking Booking { get; }
         IApplicationUser User { get; }
-        
+        void Save();
+
     }
 }
